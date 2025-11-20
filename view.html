@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3A Majalah Sekolah</title>
+<style>
+body {
+  margin:0;
+  font-family: 'Inter', sans-serif;
+  background: #f5f2ee; /* light wood background feel */
+  color: #333;
+}
+
+.topbar {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:12px 20px;
+  background:#c9a66b; /* wood tone */
+  color:white;
+  position: sticky;
+  top:0;
+  z-index:10;
+}
+
+.topbar input {
+  padding:6px 12px;
+  border-radius:6px;
+  border:none;
+  width:200px;
+}
+
+.library {
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
+  gap:16px;
+  padding:20px;
+}
+
+.magazine {
+  background:white;
+  border-radius:6px;
+  overflow:hidden;
+  box-shadow:0 4px 8px rgba(0,0,0,0.1);
+  cursor:pointer;
+  transition:transform 0.2s, box-shadow 0.2s;
+  display:flex;
+  flex-direction:column;
+}
+
+.magazine img {
+  width:100%;
+  height:200px;
+  object-fit:cover;
+}
+
+.magazine .info {
+  padding:8px;
+  font-size:14px;
+  text-align:center;
+}
+
+.magazine:hover {
+  transform:translateY(-4px);
+  box-shadow:0 8px 16px rgba(0,0,0,0.2);
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <input type="text" id="search" placeholder="Search">
+  <div>3A Majalah Sekolah</div>
+</div>
+
+<div class="library" id="library">
+  <!-- Majalah items akan load dinamik -->
+</div>
+
+<script>
+const magazines = [
+  {title:'SMK Shahbandaraya', year:2024, img:'img/cover2024-1.jpg'},
+  {title:'SMK Pusat Bandar Puchong 1', year:2024, img:'img/cover2024-2.jpg'},
+  {title:'Wesley Methodist School KL', year:2023, img:'img/cover2023-1.jpg'},
+  {title:'SMJK Krian', year:2024, img:'img/cover2024-3.jpg'},
+  {title:'SMK Damansara Utama', year:2023, img:'img/cover2023-2.jpg'},
+  // tambah semua cover majalah lain
+];
+
+function renderLibrary(filter='') {
+  const lib = document.getElementById('library');
+  lib.innerHTML = '';
+  magazines
+    .filter(m=>m.title.toLowerCase().includes(filter.toLowerCase()) || m.year.toString().includes(filter))
+    .forEach(m=>{
+      const div = document.createElement('div');
+      div.className = 'magazine';
+      div.innerHTML = `<img src="${m.img}" alt="${m.title}"><div class="info">${m.title} ${m.year}</div>`;
+      div.onclick = ()=>alert(`Open ${m.title} ${m.year}`); // boleh replace dengan buka PDF/view.html
+      lib.appendChild(div);
+    });
+}
+
+document.getElementById('search').addEventListener('input', e=>{
+  renderLibrary(e.target.value);
+});
+
+renderLibrary();
+</script>
+
+</body>
+</html>

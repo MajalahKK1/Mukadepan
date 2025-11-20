@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="ms">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Majalah Sekolah — E‑Majalah</title>
+<style>
+  /* Reset & global */
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:Inter,sans-serif;background:linear-gradient(180deg,#e8f6f3 0%,#ffffff 50%);color:#065a47;}
+  a{text-decoration:none;}
+
+  /* Wrapper */
+  .wrap{max-width:1000px;margin:40px auto;padding:20px;position:relative;}
+
+  /* Logo sekolah */
+  .school-logo{position:absolute;top:20px;left:20px;z-index:10;}
+  .school-logo img{height:80px;}
+
+  /* Header */
+  header{margin-bottom:40px;}
+  .school-name{font-size:24px;font-weight:bold;color:#065a47;}
+  .tagline{font-size:14px;color:#065a47;margin-top:4px;}
+
+  /* Hero */
+  .hero{text-align:center;padding:60px 20px;background:linear-gradient(180deg,#ffffff 0%,#c8f0e3 100%);border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.05);}
+  .hero h1{font-size:36px;color:#065a47;margin-bottom:16px;}
+  .hero p.lead{font-size:18px;color:#065a47;margin-bottom:32px;max-width:600px;margin-left:auto;margin-right:auto;}
+
+  /* Buttons */
+  .cta-row{display:inline-flex;gap:16px;flex-wrap:wrap;}
+  .btn{padding:12px 20px;border-radius:8px;font-weight:600;display:inline-flex;align-items:center;transition:0.3s;}
+  .btn-primary{background:linear-gradient(90deg,#00c689,#00a878);color:white;box-shadow:0 4px 12px rgba(0,198,137,0.3);}
+  .btn-primary:hover{box-shadow:0 6px 20px rgba(0,198,137,0.5);}
+  .btn-secondary{background:transparent;color:#065a47;border:1px solid #80e0c2;}
+  .btn-secondary:hover{background:#c8f0e3;}
+
+  /* Info section */
+  .info{text-align:center;color:#065a47;font-size:15px;line-height:1.6;margin-top:50px;}
+
+  /* Timeline */
+  .timeline{margin-top:60px;display:flex;justify-content:center;gap:12px;flex-wrap:wrap;}
+  .year{padding:10px 16px;border-radius:50px;background:white;border:1px solid #a0e6ce;color:#065a47;cursor:pointer;transition:0.2s;}
+  .year.active{background:#00c689;color:white;border:none;box-shadow:0 6px 18px rgba(0,198,137,0.3);}
+</style>
+</head>
+<body>
+
+<div class="school-logo">
+  <img src="img/logo.png" alt="Logo Sekolah">
+</div>
+
+<div class="wrap">
+  <header>
+    <div class="school-name">Sekolah Menengah Kebangsaan Harapan</div>
+    <div class="tagline">E‑Majalah Sekolah & Arkib Digital</div>
+  </header>
+
+  <div class="hero">
+    <h1>Majalah Sekolah Digital</h1>
+    <p class="lead">Nikmati bacaan majalah sekolah dalam bentuk digital — mesra alam, mudah diakses di mana‑mana, dan dikongsi dengan keluarga & rakan.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="view.html?year=2025">Baca Sekarang</a>
+      <a class="btn btn-secondary" href="pdf/majalah‑2025.pdf" download>Muat Turun PDF</a>
+    </div>
+    <div class="timeline">
+      <div class="year active" data-year="2025">2025</div>
+      <div class="year" data-year="2026">2026</div>
+      <div class="year" data-year="2027">2027</div>
+    </div>
+  </div>
+
+  <div class="info">
+    E‑majalah ini membolehkan anda membaca hasil karya pelajar, liputan aktiviti sekolah dan kenangan setiap tahun tanpa perlu mencetak — menjimatkan kos dan mesra alam.
+  </div>
+</div>
+
+<script>
+  // Timeline click handler
+  document.querySelectorAll('.year').forEach(y=>{
+    y.addEventListener('click',()=>{
+      document.querySelectorAll('.year').forEach(el=>el.classList.remove('active'));
+      y.classList.add('active');
+      const year = y.dataset.year;
+      window.location.href = `view.html?year=${year}`;
+    });
+  });
+</script>
+
+</body>
+</html>
